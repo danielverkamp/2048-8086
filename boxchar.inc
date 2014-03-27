@@ -1,0 +1,11 @@
+%define BOX_TOPLEFT     218
+%define BOX_HORIZ       196
+%define BOX_TOPRIGHT    191
+%define BOX_VERT        179
+%define BOX_BOTTOMLEFT  192
+%define BOX_BOTTOMRIGHT 217
+%define BOX_TOPJUNCT    194
+%define BOX_LEFTJUNCT   195
+%define BOX_RIGHTJUNCT  180
+%define BOX_MIDJUNCT    197
+%define BOX_BOTTOMJUNCT 193
