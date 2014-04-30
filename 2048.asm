@@ -10,6 +10,12 @@
 
 TEXT_SEG equ 0xB800
 
+; move directions
+DIR_LEFT    equ 0
+DIR_RIGHT   equ 1
+DIR_UP      equ 2
+DIR_DOWN    equ 3
+
     mov cx, 0x2607
     call set_text_mode
 
@@ -139,9 +145,21 @@ quit:
     int 0x20
 
 move_left:
+    mov bl, DIR_LEFT
+    jmp move
+
 move_right:
+    mov bl, DIR_RIGHT
+    jmp move
+
 move_up:
+    mov bl, DIR_UP
+    jmp move
+
 move_down:
+    mov bl, DIR_DOWN
+    ; fall through to move
+move:
     ; TODO
     jmp draw_board
 
