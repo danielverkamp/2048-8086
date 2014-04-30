@@ -29,8 +29,10 @@ draw_borders:
     mov ah, %1
 %endmacro
 
-%macro PUTCHAR 1
+%macro PUTCHAR 0-1
+%if %0 > 0
     mov al, %1
+%endif
     stosw
 %endmacro
 
@@ -85,12 +87,19 @@ draw_board:
     mov bl, [board + si] ; load a num from board (index into nums)
     add bx, bx ; bx * 4 for 4-byte per nums
     add bx, bx
-    lea bx, [nums + bx] ; point bx at first byte of num
+    push si
+    lea si, [nums + bx] ; point si at first byte of num
 
-    PUTCHAR [bx]
-    PUTCHAR [bx + 1]
-    PUTCHAR [bx + 2]
-    PUTCHAR [bx + 3]
+    lodsb
+    PUTCHAR
+    lodsb
+    PUTCHAR
+    lodsb
+    PUTCHAR
+    lodsb
+    PUTCHAR
+
+    pop si
 
     inc si
     add di, 2 ; move cursor past divider
