@@ -117,17 +117,18 @@ get_input:
     int 0x16
     ; AH = scan code
 
-    cmp ah, SCAN_ESC
+    xchg al, ah ; put scan code in AL - CMP AL is smaller than CMP AH
+    cmp al, SCAN_ESC
     je quit
-    cmp ah, SCAN_Q
+    cmp al, SCAN_Q
     je quit
-    cmp ah, SCAN_LEFT
+    cmp al, SCAN_LEFT
     je move_left
-    cmp ah, SCAN_RIGHT
+    cmp al, SCAN_RIGHT
     je move_right
-    cmp ah, SCAN_UP
+    cmp al, SCAN_UP
     je move_up
-    cmp ah, SCAN_DOWN
+    cmp al, SCAN_DOWN
     je move_down
     jmp get_input
 
