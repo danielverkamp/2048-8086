@@ -10,8 +10,8 @@
 
 TEXT_SEG equ 0xB800
 
-    mov ax, 0x03
-    int 0x10
+    mov cx, 0x2607
+    call set_text_mode
 
 draw_borders:
     mov ax, TEXT_SEG
@@ -133,7 +133,10 @@ get_input:
     jmp get_input
 
 quit:
-    ret
+    ; set text mode again to clear screen and reset cursor
+    mov cx, 0x0607
+    call set_text_mode
+    int 0x20
 
 move_left:
 move_right:
@@ -141,6 +144,16 @@ move_up:
 move_down:
     ; TODO
     jmp draw_board
+
+set_text_mode:
+    push cx ; make sure CX doesn't get mangled by the first INT 10h
+    mov ax, 0x03
+    int 0x10
+    pop cx
+    ; set cursor - CX (cursor shape) is input parameter
+    mov ah, 0x01
+    int 0x10
+    ret
 
 ; data
 
