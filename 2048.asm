@@ -102,7 +102,9 @@ draw_board:
     pop si
 
     inc si
-    add di, 2 ; move cursor past divider
+    ; move cursor past divider
+    inc di
+    inc di
     loop .col
 
     inc bp
